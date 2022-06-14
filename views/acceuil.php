@@ -45,12 +45,12 @@
     background-size: cover;
     position: relative;">
 
-         <div class="row">
-         <div class="col-sm-6 n" style="opacity: 0.0 ;">
+         <div class="row ">
+         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 n" style="opacity: 0.0 ;">
                 nnnn
             </div>
             
-            <div class="col-sm-6 d">
+            <div class="col-sm-12 text-center col-md-12 col-lg-12 col-xl-6 d">
                 <H1 style=" color:#9573D4;  " class="display-1 fst-italic mt-5 fw-bold">Services De </H1>
                 <H1 class="display-1 fst-italic fw-bold" style=" color:#9573D4; "><span style="color:#343BA8;">Livraison</span>  Sùres </H1>
                 <H1 class="display-1 fst-italic fw-bold" style=" color:#9573D4; "> Et Fiables!</H1>
