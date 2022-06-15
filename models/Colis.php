@@ -187,7 +187,7 @@ class Colis extends Dbconnect
     try {
 
       $sql = "INSERT INTO colis VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?)";
-      $prepare = $this->GetData($sql);
+      $prepare = $this->preparation($sql);
       $prepare = $prepare->execute([$this->getDes(), $this->getStatut(), $this->getTel_Des(), $this->getVille_Des(), $this->getAdresse_Des(), $this->getDisponibilité(), $this->getProduit(), $this->getPoids(),$this->getPrix(), date('l j F Y, H:i'),'---',$this->getIdClient()]);
     
       if ($prepare) {
@@ -196,7 +196,7 @@ class Colis extends Dbconnect
         $res=$res->fetch();
 
         $sql = "INSERT INTO  colis_a_rammasser VALUES (NULL,?)";
-        $prepare = $this->GetData($sql);
+        $prepare = $this->preparation($sql);
         $prepare = $prepare->execute([$res['id']]);
       
          
@@ -212,7 +212,7 @@ class Colis extends Dbconnect
   {
       $sql="SELECT * FROM colis WHERE id_client LIKE ?";
       $this->setIdClient($_SESSION['id_client']);
-      $prepare=$this->GetData($sql);
+      $prepare=$this->preparation($sql);
       $param=$this->getIdClient();
       $prepare->execute([$param]);
       return $prepare->fetchAll();
@@ -222,7 +222,7 @@ class Colis extends Dbconnect
   public function affichColisRamassage()
   {
       $sql="SELECT * FROM colis WHERE Statut LIKE ? AND id_client LIKE ?";
-      $prepare=$this->GetData($sql);
+      $prepare=$this->preparation($sql);
       $param='Attente du rammasage';
       $prepare->execute([$param, $_SESSION['id_client']]);
       return $prepare->fetchAll();
@@ -237,7 +237,7 @@ class Colis extends Dbconnect
      
      $ID_client=$_SESSION['id_client'];
       $sql = "UPDATE client SET Adresse=?, Numero=?, Ville=? WHERE id=$ID_client";
-      $prepare = $this->GetData($sql);
+      $prepare = $this->preparation($sql);
       $prepare = $prepare->execute([$this->Adresse, $this->TEL,$this->Ville]);
 
       if ($prepare) {
@@ -254,7 +254,7 @@ class Colis extends Dbconnect
   public function infoClient()
   {
       $sql="SELECT * FROM client WHERE id LIKE ?";
-      $prepare = $this->GetData($sql);
+      $prepare = $this->preparation($sql);
       $ID_client=$_SESSION['id_client'];
        $prepare->execute([$ID_client]);
       return $prepare->fetch();

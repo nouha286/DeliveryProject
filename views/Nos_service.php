@@ -1,4 +1,11 @@
 
+<?php 
+ 
+
+ $auto=new AdministrateurController();
+ $auto->autorisation();
+ $auto->separationAdmin();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +52,7 @@
     <h1 class="text-center display-5 mb-5 fst-italic mt-2" style="color:#9573D4;">Nos services</h1>
             <div class="row mt-5 gx-5">
                 <div class="col-lg-4" >
-                <div class="p-3 border shadow-lg p-3 mb-5  rounded "><span class="fs-3 fw-bold font-monospace">Livraison</span><i class="fa fa-2x ms-2  fa-shopping-cart"  style="color:#9573D4;" aria-hidden="true"></i> <p class="fs-5 font-monospace mt-5 ">Nous assurons la livraison de vos colis dans les plus bref delais et dans plus de 260 villes et provinces.</p></div>
+                <div class="p-3 border shadow-lg p-3 mb-5  rounded "><span class="fs-3 fw-bold font-monospace">Livraison</span><i class="fa fa-2x ms-2  fa-shopping-cart"  style="color:#9573D4;" aria-hidden="true"></i> <p class="fs-5 font-monospace mt-5 ">Nous assurons la livraison de vos colis dans les plus bref delais avec un trés bon prix 15 DH à MARRAKECH et 35 DH dans tous les villes du Maroc.</p></div>
                 </div>
                 
 

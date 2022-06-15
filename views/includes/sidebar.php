@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+?>
 <div class="sticky-top" style="background-color: white;">
 <nav class="navbar  navbar-light  "  >
   <div class="container-fluid"  >

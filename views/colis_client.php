@@ -1,7 +1,7 @@
-<?php
- 
-
-
+<?php 
+$auto=new AdministrateurController();
+$auto->autorisation();
+$auto->separationAdmin();
 ?>
 
 

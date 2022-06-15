@@ -1,6 +1,11 @@
 <?php 
 
 
+$Admin=new AdministrateurController();
+
+$Admin->autorisationAdmin();
+$Admin->separationClient();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

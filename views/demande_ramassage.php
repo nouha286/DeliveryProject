@@ -1,4 +1,11 @@
 <?php 
+$auto=new AdministrateurController();
+
+
+$auto->autorisationAdmin();
+$auto->separationClient();
+
+
 
 ?>
 <!DOCTYPE html>

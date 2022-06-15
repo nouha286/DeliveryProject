@@ -26,7 +26,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = ' from:'.$_SESSION['emailCont'];
-    $mail->Body    =  ''.$_SESSION['sujetCont'].'';
+    $mail->Body    =  ''.$_SESSION['sujetCont'].'<h6 class="mt-5">Signature: '.$_SESSION['nameCont'].'</h6>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
      $_SESSION['msg']='le message est envoyé';
     $mail->send();

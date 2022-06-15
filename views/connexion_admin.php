@@ -1,5 +1,7 @@
 <?php 
 
+$auto=new AdministrateurController();
+$auto->autorisationLogAdmin();
 
 
 ?>

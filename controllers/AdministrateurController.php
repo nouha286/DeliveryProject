@@ -6,7 +6,7 @@ class AdministrateurController{
 
   public $id;
  
-
+//fonction de connexion du client
 
     public function connexionClient(){
      
@@ -18,12 +18,12 @@ class AdministrateurController{
                  
                
                   $connection->setEmail($_POST['Email']);
-                  $connection->setPassword($_POST['Password']);  
+                  $connection->setPassword(md5($_POST['Password']));  
                   $Email=$connection->getEmail();
                   $Password= $connection->getPassword(); 
                  
                   $sql="SELECT * FROM client WHERE Email LIKE ? AND Password LIKE ? ";
-                  $result=$connection->GetData($sql);
+                  $result=$connection->preparation($sql);
                   $result->execute([$Email,$Password]);
                   $res= $result->fetch();
                   
@@ -62,7 +62,7 @@ class AdministrateurController{
     }
 
 
-
+//fonction de création des colis
 
     public function colisClient(){
    
@@ -93,6 +93,8 @@ class AdministrateurController{
       $client->insert();
    }
     }
+
+    //fonction de connexion Admin
     public function connexionAdmin(){
       session_start();
       if (isset($_POST['loginAd']) && isset($_POST['EmailAd']) && isset($_POST['PasswordAd']) )
@@ -102,12 +104,12 @@ class AdministrateurController{
                  
                
                   $connection->setEmail($_POST['EmailAd']);
-                  $connection->setPassword($_POST['PasswordAd']);  
+                  $connection->setPassword(md5($_POST['PasswordAd']));  
                   $Email=$connection->getEmail();
                   $Password= $connection->getPassword(); 
                  
                   $sql="SELECT * FROM inscription_admin WHERE Email LIKE ? AND Password LIKE ? ";
-                  $result=$connection->GetData($sql);
+                  $result=$connection->preparation($sql);
                   $result->execute([$Email,$Password]);
                   $res= $result->fetch();
                  
@@ -118,6 +120,7 @@ class AdministrateurController{
                     
                      
                     $_SESSION['nom']=$res['Nom'];
+                    $_SESSION['emailAdmin']=$res['Email'];
                    
                    
                     header('location: home_admin');
@@ -137,6 +140,7 @@ class AdministrateurController{
                   }
                 }
     }
+    //fonction de modification et suppression colis
 
     public function editInfoColis(){
       $colis=new Colis();
@@ -169,15 +173,15 @@ class AdministrateurController{
       
           $sql="DELETE FROM colis_a_rammasser WHERE id_colis LIKE ?";
           $colis=new Dbconnect();
-          $prepare=$colis->GetData($sql);
+          $prepare=$colis->preparation($sql);
          
           $prepare->execute([$param]);
       
-          $prepare=$colis->GetData($sql);
+          $prepare=$colis->preparation($sql);
       
           $sql="DELETE FROM colis WHERE id LIKE ?";
       
-          $prepare=$colis->GetData($sql);
+          $prepare=$colis->preparation($sql);
          
           $prepare->execute([$param]);
           
@@ -185,6 +189,7 @@ class AdministrateurController{
       }
         
    }
+   //fonction d'obtention des informations colis pour la modification des colis
 
    public function affichEdit()
    { 
@@ -192,7 +197,7 @@ class AdministrateurController{
     {session_start();
         $sql="SELECT *FROM colis WHERE id LIKE ?";
        $colis=new Dbconnect();
-        $prepare=$colis->GetData($sql);
+        $prepare=$colis->preparation($sql);
        $param=$_POST['id'];
         $prepare->execute([$param]);
         $modification= $prepare->fetch();
@@ -212,7 +217,7 @@ class AdministrateurController{
         
     }
    }
-  //  ------------------------------------------------------------------------
+  //  modification des données pour le service du ramassage
     public function editRammassage(){
       $rammassage=new Colis;
       if(isset($_POST['saveEditRammassage']))
@@ -223,13 +228,15 @@ class AdministrateurController{
     
     
     }
+
+    // fonction pour l'inscription des admin
     public function inscriptionAdmin(){
       if(isset($_POST['saveInscriptionAdmin']))
 { 
   $id=2;
   $sql="SELECT Identifecateur FROM identifecateur WHERE id LIKE ?";
   $admin=new Admin();
-  $admin=$admin->GetData($sql);
+  $admin=$admin->preparation($sql);
   $admin->execute([$id]);
   $admin=$admin->fetch();
    
@@ -239,7 +246,7 @@ class AdministrateurController{
      $ad=new Admin();
      $ad->setNom($_POST['nom']);
      $ad->setEmail($_POST['Email']);
-     $ad->setPassword($_POST['Password']);
+     $ad->setPassword(md5($_POST['Password']));
      session_start();
      $_SESSION['error']='';
      $ad->insert();
@@ -254,6 +261,8 @@ class AdministrateurController{
    }
 }
     }
+
+ // fonction pour l'inscription des admin
     public function inscriptionClient(){
       if(isset($_POST['saveInscriptionClient']))
    {
@@ -265,11 +274,13 @@ class AdministrateurController{
       $client->setAdresse($_POST['Adresse']);
       $client->setType_business($_POST['T']);
       $client->setEmail($_POST['Email']);
-      $client->setPassword($_POST['Password']);
+      $client->setPassword(md5($_POST['Password']));
 
       $client->insert();
    }
     }
+
+    //fonction pour changer l'etat des colis et l'activation des comptes
 
     public function Etat(){
       if(isset($_POST['id_Retour']))
@@ -278,7 +289,7 @@ class AdministrateurController{
       $Admin=new Admin();
           $id=$_POST['id_Retour'];
           $sql="UPDATE colis SET Etat='Retour' WHERE id=?";
-          $prepare = $Admin->GetData($sql);
+          $prepare = $Admin->preparation($sql);
           $prepare= $prepare->execute([$id]);
           header('location:etat_colis');
       }
@@ -289,7 +300,7 @@ class AdministrateurController{
       $Admin=new Admin();
           $id=$_POST['id_Livré'];
           $sql="UPDATE colis SET Etat='Livré' WHERE id=?";
-          $prepare = $Admin->GetData($sql);
+          $prepare = $Admin->preparation($sql);
           $prepare= $prepare->execute([$id]);
           header('location:etat_colis');
           
@@ -300,7 +311,7 @@ class AdministrateurController{
       $Admin=new Admin();
           $id=$_POST['id_ramassage'];
           $sql="UPDATE colis SET Statut='Ramassé' WHERE id=?";
-          $prepare = $Admin->GetData($sql);
+          $prepare = $Admin->preparation($sql);
           $prepare= $prepare->execute([$id]);
           header('location:demande_ramassage');
           
@@ -312,7 +323,7 @@ class AdministrateurController{
           $client=new Client();
           $id=$_POST['id_activer'];
           $sql="SELECT * FROM inscription_client WHERE id=?";
-          $prepare = $client->GetData($sql);
+          $prepare = $client->preparation($sql);
            $prepare->execute([$id]);
           $c=$prepare->fetch();
         
@@ -326,11 +337,11 @@ class AdministrateurController{
           $client->setPassword($c['Password']);
       
           $sql = "INSERT INTO client  VALUES (null,?,?,?,?,?,?,?,?)";
-          $prepare = $client->GetData($sql);
+          $prepare = $client->preparation($sql);
           $prepare = $prepare->execute([$client->getNom(), $client->getNom_business(), $client->getType_business(), $client->getNumero(), $client->getVille(), $client->getAdresse(), $client->getEmail(), $client->getPassword()]);
       
           $sql="DELETE FROM inscription_client WHERE id=?";
-          $prepare = $client->GetData($sql);
+          $prepare = $client->preparation($sql);
            $prepare->execute([$id]);
       
           header('location:nouveaux_inscription');
@@ -344,7 +355,7 @@ class AdministrateurController{
           $id=$_POST['id_supprimer'];
          
           $sql="DELETE FROM inscription_client WHERE id=?";
-          $prepare = $client->GetData($sql);
+          $prepare = $client->preparation($sql);
            $prepare->execute([$id]);
       
           header('location:nouveaux_inscription');
@@ -353,7 +364,7 @@ class AdministrateurController{
       
     }
 
-    
+   //la redirection vers la page de modification des informations du ramassage 
  public function operatRam()
   { 
       if (isset($_POST['edit_ram']))
@@ -363,7 +374,7 @@ class AdministrateurController{
       }
   }
 
-
+// fonction pour l'affichage du message d'erreur d'inscription admin
   public function AffichError()
   { 
    
@@ -376,25 +387,26 @@ class AdministrateurController{
       
   }
 
-
+//affichage des nouveaux clients
   public function affichNouveauxClient()
   {
     $client=new Client();
    return $client->affichNvClient();
   }
+//affichage du colis à ramasser
   public function affichRamassageClient()
   {
     $rammassage=new Colis();
     return $rammassage->affichColisRamassage();
   }
-
+//affichage des information d'un client par rapport au clé etrangaire
   public function InfoClient()
   {
     $info=new Colis();
     return $info->InfoClient();
   }
 
-
+//affichage des infos du colis avec l'etat actuelle
   public function suiviClient()
   {
     $suivi=new Colis();
@@ -402,26 +414,27 @@ class AdministrateurController{
 
   }
 
-
+//affichage des colis dans l'interface d'admin
   public function affichColisAdmin()
   {
     $colis=new Admin();
     return $colis->affichNvColis();
   }
 
+  //affichage du demandes de ramassage colis dans l'interface d'admin
  public function affichRamassageAdmin()
  {
    $rammassage=new Admin;
    return $rammassage->affichColisRamassage();
  }
-
+//affichage des informations de tous les clients dans l'interface d'admin
  public function affichClientAdmin()
  {
    $nosClient=new Admin();
    return $nosClient->affichNosClient();
  }
 
-
+//fonction pour l'affichage d'erreur pour la connexion admin
  public function AffichErrorConnexion()
   { 
    
@@ -434,7 +447,7 @@ class AdministrateurController{
       
   }
 
-  
+  //fonction pour l'affichage d'erreur pour la connexion client
  public function AffichErrorClient()
  { 
   
@@ -454,7 +467,7 @@ class AdministrateurController{
      }
      
  }
-
+//fonction pour stocker les informations nécessaires pour envoyer un email
  public function ContactUs()
  {
    if(isset($_POST['contacter']))
@@ -466,7 +479,7 @@ class AdministrateurController{
      
    }
  }
-
+//fonction pour afficher le message de la validation d'envoie d'email
  public function messageEmail()
  {
 if(isset($_SESSION['msg']))
@@ -478,5 +491,141 @@ if(isset($_SESSION['msg']))
 
  }
 }
+
+//fonction pour l'autorisation d'acces au dashbord Client
+public function autorisation()
+{
+  if(!isset($_SESSION['nom']))
+  {
+    echo '
+            <script>
+                window.location.href = "connexion_client";
+            </script>
+        ';
+
+  }
+}
+//fonction pour l'affichage des informations client
+public function edit_info_ramassage()
+{
+  $edit=new Colis();
+ return $edit->infoClient();
+}
+// fonction poour afficher la somme des colis de chaque client
+public function sommeColisAdmin()
+{
+  $somme=new Admin();
+ return $somme->statistiqueColis();
+}
+// fonction poour afficher la somme des colis à rammasser de chaque client
+public function statistiqueRamssageAdmin()
+{
+  $somme=new Admin();
+  return $somme->statistiqueRamassage();
+}
+// fonction poour afficher le nombre des client
+public function statistiqueClientAdmin()
+{
+  $somme=new Admin();
+ return  $somme->statistiqueClient();
+}
+// fonction poour afficher la somme des colis de tous les clients
+
+public function sommeColisClient()
+{
+  $somme=new Client();
+ return $somme->statistiqueColis();
+}
+// fonction poour afficher la somme des colis de chaque client
+public function statistiqueRamssageClient()
+{
+  $somme=new Client();
+  return $somme->statistiqueRamassage();
+}
+
+// fonction poour afficher la somme des colis de chaque client
+public function statistiqueRetourClient()
+{
+  $somme=new Client();
+ return  $somme->statistiqueRetour();
+}
+
+//fonction pour l'accés au autres page en tant que utilisateur Client
+public function autorisationLog()
+{
+  if(isset($_SESSION['nom']))
+  {
+    echo '
+            <script>
+                window.location.href = "home_client";
+            </script>
+        ';
+
+  }
+}
+//fonction pour l'accés au autres page en tant que utilisateur Client
+
+
+public function autorisationLogAdmin()
+{
+  if(isset($_SESSION['nom']))
+  {
+    echo '
+            <script>
+                window.location.href = "home_admin";
+            </script>
+        ';
+
+  }
+}
+
+//fonction pour refuser l'accés aux pages tant qu'il est déconnecter
+
+public function autorisationAdmin()
+{
+  if(!isset($_SESSION['nom']))
+  {
+    echo '
+            <script>
+                window.location.href = "connexion_admin";
+            </script>
+        ';
+
+  }
+
+
+}
+ //fonction pour refuser l'accés aux pages d'admin tant que l'utilisateur est un client
+
+public function separationClient()
+{
+  if(isset( $_SESSION['id_client']))
+  {
+    echo '
+            <script>
+                window.location.href = "home_client";
+            </script>
+        ';
+
+  }
+
+}
+//fonction pour refuser l'accés aux pages du client tant que l'utilisateur est un admin
+
+
+public function separationAdmin()
+{
+  if(isset( $_SESSION['emailAdmin']))
+  {
+    echo '
+            <script>
+                window.location.href = "home_admin";
+            </script>
+        ';
+
+  }
+
+}
+
 }
 ?>

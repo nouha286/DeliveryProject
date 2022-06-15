@@ -1,7 +1,11 @@
-<?php $rammassage=new Colis();
-
-
+<?php 
+$auto=new AdministrateurController();
+$auto->autorisation();
+$auto->separationAdmin();
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +61,7 @@
           <form data-parsley-validate action="Tunnel" method="POST" >
           <div class="mb-3">
                         
-                        <input data-parsley-trigger="change" required	data-parsley-required="true" name="Adresse" value="<?php $info=$rammassage->infoClient(); echo $info['Adresse']; ?>" minlength="3"	data-parsley-minlength="3"	 type="text" class="form-control" placeholder="Adresse du vendeur" >
+                        <input data-parsley-trigger="change" required	data-parsley-required="true" name="Adresse" value="<?php $info=$auto->edit_info_ramassage(); echo $info['Adresse']; ?>" minlength="3"	data-parsley-minlength="3"	 type="text" class="form-control" placeholder="Adresse du vendeur" >
                         
               </div>
 

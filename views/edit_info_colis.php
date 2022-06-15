@@ -1,5 +1,9 @@
+<?php 
+$auto=new AdministrateurController();
+$auto->autorisation();
+$auto->separationAdmin();
+?>
 
-<?php echo  $_SESSION['Des'];  ?>
 
  
 <!DOCTYPE html>

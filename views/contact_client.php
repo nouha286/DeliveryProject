@@ -1,4 +1,8 @@
-
+<?php 
+$auto=new AdministrateurController();
+$auto->autorisation();
+$auto->separationAdmin();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +49,7 @@
 
 
     <section class="callout ms-2 shadow-lg bg-body rounded col-8 col-md-8">
-    
+    <h1 class="text-center display-5 mb-5 fst-italic mt-2" style="color:#9573D4;">Envoyez vos messages et réclamations</h1>
     <div class="card mt-5  shadow-lg p-3 mb-5 bg-body rounded"  >
     <div class="card-body text-end " >
           <form action="Tunnel" method="POST">

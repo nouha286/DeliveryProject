@@ -1,4 +1,7 @@
 <?php 
+$Admin=new AdministrateurController();
+$Admin->autorisationAdmin();
+$Admin->separationClient();
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +71,7 @@
        
         <tr>
         <?php
-                            $Admin = new AdministrateurController;
+                           
                             $Nvcolis = $Admin->affichColisAdmin();
                             
                             foreach ($Nvcolis as $colis) {

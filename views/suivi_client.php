@@ -1,4 +1,9 @@
+<?php 
+ 
 
+ $auto=new AdministrateurController();
+ $auto->autorisation();
+ $auto->separationAdmin();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

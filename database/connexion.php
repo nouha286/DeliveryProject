@@ -7,7 +7,7 @@ class Dbconnect
         $conn = new PDO("mysql:host=localhost; dbname=delivery" ,"root" ,"");
         return $conn;
     }
-    public function GetData($req)
+    public function preparation($req)
   {
     try
     {

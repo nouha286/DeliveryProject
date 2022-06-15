@@ -73,7 +73,7 @@ class Admin extends Dbconnect
     try {
 
       $sql = "INSERT INTO inscription_admin  VALUES (null,?,?,?)";
-      $prepare = $this->GetData($sql);
+      $prepare = $this->preparation($sql);
       $prepare = $prepare->execute([$this->getNom(), $this->getEmail(), $this->getPassword()]);
 
       if ($prepare) {
@@ -104,7 +104,7 @@ class Admin extends Dbconnect
   public function infoClient()
   {
       $sql="SELECT * FROM client INNER JOIN coli";
-      $prepare = $this->GetData($sql);
+      $prepare = $this->preparation($sql);
       
       $ID_client=$_SESSION['id_client'];
        $prepare->execute([$ID_client]);
@@ -116,7 +116,7 @@ class Admin extends Dbconnect
   public function NomStore()
   {
     $sql="SELECT Nom_business FROM client WHERE id LIKE ?";
-    $prepare=$this->GetData($sql);
+    $prepare=$this->preparation($sql);
     $id=$this->getNomstore();
     $prepare->execute([$id]);
    return $prepare->fetch();
@@ -133,7 +133,7 @@ class Admin extends Dbconnect
   public function statistiqueColis()
   {
     $sql="SELECT * FROM colis ";
-    $prepare = $this->GetData($sql);
+    $prepare = $this->preparation($sql);
     $prepare->execute([]);
     $prepare=$prepare->fetchAll();
     return count($prepare);
@@ -143,7 +143,7 @@ class Admin extends Dbconnect
   public function statistiqueRamassage()
   {
     $sql="SELECT * FROM colis WHERE  Statut LIKE ?";
-    $prepare = $this->GetData($sql);
+    $prepare = $this->preparation($sql);
     $prepare->execute(['Attente du rammasage']);
     $prepare=$prepare->fetchAll();
     return count($prepare);
@@ -153,7 +153,7 @@ class Admin extends Dbconnect
   public function statistiqueClient()
   {
     $sql="SELECT * FROM client";
-    $prepare = $this->GetData($sql);
+    $prepare = $this->preparation($sql);
     $prepare->execute();
     $prepare=$prepare->fetchAll();
     return count($prepare);

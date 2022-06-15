@@ -110,7 +110,7 @@ class Client extends Dbconnect
     try {
 
       $sql = "INSERT INTO inscription_client  VALUES (null,?,?,?,?,?,?,?,?)";
-      $prepare = $this->GetData($sql);
+      $prepare = $this->preparation($sql);
       $prepare = $prepare->execute([$this->getNom(), $this->getNom_business(), $this->getType_business(), $this->getNumero(), $this->getVille(), $this->getAdresse(), $this->getEmail(), $this->getPassword()]);
 
       if ($prepare) {
@@ -131,7 +131,7 @@ class Client extends Dbconnect
   public function statistiqueColis()
   {
     $sql="SELECT * FROM colis WHERE id_client LIKE ? ";
-    $prepare = $this->GetData($sql);
+    $prepare = $this->preparation($sql);
     $prepare->execute([$_SESSION['id_client']]);
     $prepare=$prepare->fetchAll();
     return count($prepare);
@@ -141,7 +141,7 @@ class Client extends Dbconnect
   public function statistiqueRamassage()
   {
     $sql="SELECT * FROM colis WHERE id_client LIKE ? AND Statut LIKE ?";
-    $prepare = $this->GetData($sql);
+    $prepare = $this->preparation($sql);
     $prepare->execute([$_SESSION['id_client'],'Attente du rammasage']);
     $prepare=$prepare->fetchAll();
     return count($prepare);
@@ -151,7 +151,7 @@ class Client extends Dbconnect
   public function statistiqueRetour()
   {
     $sql="SELECT * FROM colis WHERE id_client LIKE ? AND Etat LIKE ?";
-    $prepare = $this->GetData($sql);
+    $prepare = $this->preparation($sql);
     $prepare->execute([$_SESSION['id_client'],'Retour']);
     $prepare=$prepare->fetchAll();
     return count($prepare);

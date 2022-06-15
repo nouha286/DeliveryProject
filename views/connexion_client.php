@@ -1,5 +1,5 @@
-
-<?php  ?>
+<?php $auto=new AdministrateurController();
+$auto->autorisationLog(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
