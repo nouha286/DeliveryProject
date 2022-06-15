@@ -65,9 +65,9 @@
           <th scope="col"> N° TEL</th>
           <th scope="col">VILLE</th>
           <th scope="col">ADRESSE</th>
-          <th scope="col">PRODUITS</th>
+     
           <th scope="col">EMAIL</th>
-          <th scope="col" class="text-center">ACTIONS</th>
+          <th scope="col" class="">ACTIONS</th>
           
 
 
@@ -91,7 +91,7 @@
                                             <td>' . $client['Ville'] . '</td>
                                             <td>' . $client['Adresse'] . '</td>
                                             <td>' . $client['Email'] . '</td>
-                                            <td>
+                                            
                                              
                                              <form action="Tunnel" method="POST"> <td class="d-flex flex-row"><button type="submit" class="btn  btn-lg me-2" style="text-decoration:none; color:white; background-color:greenyellow; " name="id_activer" value="'.$client['id'].'">Activer</button> <button class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " name="id_supprimer" value="'.$client['id'].'">Supprimer</button> </td>
                                              </form>
