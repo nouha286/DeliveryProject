@@ -7,7 +7,7 @@ class Admin extends Dbconnect
     public $Password;
     public $id;
     public $Nomstore;
-    public $error;
+    
    
     public function setId($id)
     {

@@ -96,7 +96,7 @@ $Admin->separationClient();
                                             <td>' . $colis['Poids'] . 'Kg</td>
                                             <td>' . $colis['Prix'] . '</td>
                                             <td>' . $nom_store['Nom_business'] . '</td>
-                                            <form action="Tunnel" method="POST"><td colspan="4" class="text-center"><button type="submit" class="btn  btn-lg" style="text-decoration:none; color:white; background-color:greenyellow; " name="id_Livré" value="'.$colis['id'].'">Livré</button> <button type="submit" class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " name="id_Retour" value="'.$colis['id'].'">Retour</button> </td>
+                                            <form action="Tunnel" method="POST"><td colspan="4" class="text-center"><button type="submit" class="btn  btn-lg" style="text-decoration:none; color:white; background-color:greenyellow; " name="id_Livré" value="'.$colis['id'].'">Livré</button> <button type="submit" class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " name="id_Retour" value="'.$colis['id'].'">Retour</button> <button type="submit" class="btn  btn-lg" style="text-decoration:none; color:white; background-color:orange; " name="id_transit" value="'.$colis['id'].'">En Transit</button></td>
                                             </form>
                                             
                                            

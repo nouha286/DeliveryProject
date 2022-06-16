@@ -293,6 +293,17 @@ class AdministrateurController{
           $prepare= $prepare->execute([$id]);
           header('location:etat_colis');
       }
+
+      if(isset($_POST['id_transit']))
+      {
+          
+      $Admin=new Admin();
+          $id=$_POST['id_transit'];
+          $sql="UPDATE colis SET Etat='En transit' WHERE id=?";
+          $prepare = $Admin->preparation($sql);
+          $prepare= $prepare->execute([$id]);
+          header('location:etat_colis');
+      }
       
       if(isset($_POST['id_Livré']))
       {

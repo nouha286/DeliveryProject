@@ -54,15 +54,15 @@ $Admin->separationClient();
           <th scope="col">colis N°</th>
           <th scope="col">DESTAINATAIRE</th>
           <th scope="col">STATUT</th>
-          <th scope="col">DATE DE CREATION</th>
+          <th scope="col">TELEPHONE.DES</th>
           <th scope="col">VILLE.DES</th>
 
           <th scope="col">ADRESSE.DES</th>
-          <th scope="col">Desponibilité.DES</th>
+          <th scope="col">Disponibilite_Des</th>
           <th scope="col">PRODUIT</th>
           <th scope="col">POIDS</th>
           <th scope="col">PRIX</th>
-          <th scope="col">Statut</th>
+          <th scope="col">ETAT</th>
           <th scope="col">Vendeurs</th>
           
         </tr>

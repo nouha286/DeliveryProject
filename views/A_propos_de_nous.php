@@ -80,7 +80,7 @@
 
 <section class="container mb-5">
 <H1 style="color:#9573D4" class="text-center mt-5">Nos Services</H1>
-<div class="container" style="">
+<div class="container" >
          <div class="row mt-5 gx-5">
                 <div class="col-lg-4" >
                 <div class="p-3 border shadow-lg p-3 mb-5  rounded " style="background-color: white;" ><span class="fs-3 fw-bold font-monospace">Livraison</span><i class="fa fa-2x ms-2  fa-shopping-cart"  style="color:#9573D4;" aria-hidden="true"></i> <p class="fs-5 font-monospace mt-5 ">Nous assurons la livraison de vos colis dans les plus bref delais et dans plus de 260 villes et provinces.</p></div>
